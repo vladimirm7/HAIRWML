@@ -1,0 +1,144 @@
+# format: HAIRWML v0.1
+author: Vladimir Marchenko
+created: 2025-08-22
+license: MIT
+
+about: A minimal flat markup protocol for human and AI cooperation
+pronunciation: hair woo
+concept: HAIRW = Human and AI Readable & Writable
+protocol: HAIRWML = A markup language implementing the HAIRW concept
+
+structure: each line is a key: value pair
+!: the value is one line of freeform text
+!: separator ! splits multiple values on the same line
+
+continuation: lines beginning with !: extend the previous key’s value
+!: text after !: is appended to the previous key’s value concatenated by a newline
+!: blank or whitespace-only lines are preserved as-is
+!: leading spaces before !: are ignored
+!: continuation lines are ignored if no key has been seen yet
+
+whitespace: leading spaces before any line type (key, continuation, comment) are ignored
+!: trailing spaces after !: are preserved in the value
+!: indentation is visual only ! never affects parsing
+
+escape: use \! to include a literal exclamation mark in a value
+escaped_colon: use \: to include a literal colon in a key
+comments: lines starting with # or : are ignored by parsers
+
+no_colon: if no colon is present, entire line is treated as key with empty string value
+specials: only :, !, and # have meaning
+!: all other characters are literal unless defined in an extension
+
+indentation: leading spaces before keys are cosmetic only
+!: they are ignored by parsers
+
+keys: key format is user-defined
+!: hairwml does not interpret or constrain keys
+
+extension: recommended file extension is .hairw
+
+features: 
+!: Editable by humans
+!: Writable by AI
+!: Usable as logs
+!: Schema-free
+!: Diffable
+!: Journalable
+!: Streamable
+!: Versionable
+!: Greppable
+!: Prompt-compatible
+!: Offline-first
+!: Zero-dependency
+!: Self-documenting
+
+validation: all files are valid HAIRWML
+!: even without a single colon
+!: each line becomes a key with an empty string value
+!: hairwml does not reject or parse-fail any input
+!: all sanity checks are outside of protocol
+
+parsing: the only state retained between lines is the last valid key
+!: this is used to apply continuation lines (lines starting with !:)
+
+philosophy: HAIRWML is not a config language
+!: it's a shared working surface
+!: it defines no verbs, enforces no schema, and encodes no hierarchy
+!: meaning emerges from context: human, agent, script, or system
+!: a manifest, a diary, a logbook, a command set — all valid uses
+
+comparison:
+  YAML describes data — HAIRWML makes it simpler
+  JSON structures data — HAIRWML also keeps you sane
+  XML enforces order — HAIRWML refuses to comment on that
+
+comparison_table:
+  System:        Human  AI  Machine
+  Reader:
+    YAML:        4      3   5
+    JSON:        3      3   5
+    XML:         2      2   5
+    Markdown:    5      4   2
+    CSV:         3      2   4
+    HAIRWML:     5      5   5
+  Writer:
+    YAML:        3      4   4
+    JSON:        2      3   5
+    XML:         1      2   4
+    Markdown:    5      4   1
+    CSV:         3      2   4
+    HAIRWML:     5      5   5
+
+use_cases: 
+!: Trade execution manifests
+!: System operator playbooks
+!: AI-agent interaction logs
+!: Tactical journaling
+!: Prompts and response plans
+!: Offline control systems
+!: Logs and timeline entries
+!: Agent memory and planning
+!: Shell session journaling
+!: Configuration diff tracking
+!: Inter-process interface (IPI) transport format
+
+example_market:
+  SVCB: Buy 15.90 20 ! Cancel all
+  PHOR: note watching 430 ! exit half
+  comment: I really like this setup \! no joke
+
+example_ops:
+  db01: restart postgres ! backup complete
+  web01: deploy v1.6 ! note: test coverage incomplete
+
+example_journal:
+  morning: walked 3km ! sketched ladder logic
+  dream: missed train again \! barefoot
+
+example_logs:
+  2025-08-23 14:50: login attempt
+  2025-08-23 14:51: login success
+  2025-08-23 14:52: trade placed
+  2025-08-23 14:53: note: adjusted stop loss
+  2025-08-23 14:55: alert: latency detected
+
+example_diffs:
+  max_orders: increased from 100 to 200
+  ssl_enabled: false → true
+  timezone: switched from UTC to UTC+3
+
+example_rants:
+  !: I used to joke back in the day that XML made me bald
+  !: not bold — bald, as in having no hairs on the head
+  !: and if you juniors want to be bald like me
+  !: go on and use your XML as much as you want
+
+reserved_prefixes: certain characters are structurally reserved
+!: keys may not begin with #, !, or :
+
+tagging: first line may include # format: HAIRWML v0.1 to declare format version
+
+status: version 0.1
+!: frozen core syntax
+!: open to semantic extensions
